@@ -2,16 +2,16 @@ import React from 'react';
 
 class Header extends React.Component {
 	constructor() {
-			super();
-			this.state = {}
+		super();
+		this.state = {}
 	}
 
 	render() {
-			return (
-					<header className='c-header'>
-							<h1>Bills App</h1>
-					</header>
-			)
+		return (
+			<header className='o-wrap c-header'>
+				<h1>Spending Tracker</h1>
+			</header>
+		)
 	}
 }
 

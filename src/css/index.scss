@@ -1,15 +1,58 @@
 @import 'reset';
 
+$hspace: 20px;
+$vspace: 20px;
+
+$font-size: 16px;
+$font-size-small: 14px;
+$font-size-medium: 20px;
+$font-size-large: 24px;
+$font-size-xlarge: 40px;
+
+$font-color-dark:#454545;
+$font-color-light: #727272;
+$color-border: #a8a8a8;
+$linear-gradient: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(106,9,121,0.8365546902354692) 40%, rgba(0,212,255,1) 100%);
+
 * { box-sizing: border-box; }
 
 // ------------- Billing App ---------------
+.o-wrap { max-width: 600px; margin: 0 auto; }
 
-.c-container { width: 100%; height: 100vh; background: rgb(2,0,36); background: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(106,9,121,0.8365546902354692) 40%, rgba(0,212,255,1) 100%); }
+.c-container { position: relative; width: 100%; height: 100vh; background: $linear-gradient; }
 
-.c-header { width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 20px 0; }
-.c-header h1 { font-size: 40px; font-weight: bold; color: #fff; }
+.c-header { width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: $vspace*2; padding: $vspace 0; }
+.c-header h1 { font-size: $font-size-xlarge; font-weight: bold; color: #fff; }
 
-.c-bills { max-width: 580px; margin: 0 auto; padding: 0 20px; }
-.c-bills__container__total { display: flex; justify-content: space-between; align-items: center; color: #fff; }
-.c-bills__container__total__text { font-size: 24px; }
-.c-bills__container__total__number { font-size: 20px; }
+.c-bills { padding: 0 $hspace; }
+.c-bills__container__total { display: flex; justify-content: space-between; align-items: center; margin-bottom: $vspace*2; color: #fff; }
+.c-bills__container__total__text { font-size: $font-size-large; }
+.c-bills__container__total__number { font-size: $font-size-medium; }
+
+.c-bills__container__list { margin-bottom: $vspace/2; padding: $vspace $hspace; background-color: #fff; border-radius: 10px; }
+.c-bills__container__list__item { position: relative; display: flex; justify-content: space-between; align-items: center; margin-bottom: $vspace; 
+  &:last-child { margin-bottom: 0; 
+    &::after{ border-bottom: none; }
+  }
+}
+.c-bills__container__list__item::after { position: absolute; content: ''; bottom: -$hspace/2; left: -$hspace; right: -$hspace; border-bottom: 1px solid $color-border; }
+.c-bills__container__list__item__logo { display: flex; align-items: center; 
+  img { width: 24px; height: 24px; margin-right: $hspace; }
+  p { font-weight: bold; color: $font-color-dark; text-transform: capitalize; }
+}
+.c-bills__container__list__item__price { color: $font-color-light; }
+
+.c-nav { position: absolute; bottom: 0; width: 100%; display: flex; padding: 0 $hspace; justify-content: space-between; align-items: center; background-color: #fff; }
+.c-nav__link { padding: $vspace $hspace/2; text-align: center; color: $font-color-light; text-transform: capitalize; transition: all .3s ease-in-out; 
+  &:hover { cursor: pointer; color: #6a0979; }
+}
+.c-nav__link__icon svg { margin-bottom: $vspace/2; font-size: 30px; }
+// TODO: add separate bg color
+// .c-nav__link--spend {}
+// .c-nav__link--save {}
+// .c-nav__link--history {}
+// .c-nav__link--settings {}
+.c-nav__link--add { position: relative; width: 50px; height: 50px; background-color: #00d4ff; border-radius: 50%;
+  .c-nav__link__icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  svg { margin-bottom: 0; color: #fff; }
+}
