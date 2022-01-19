@@ -1,10 +1,19 @@
 import React from 'react';
-import logo from '../img/logo.png'
 
 class Bills extends React.Component {
-	constructor() {
-		super();
-		this.state = {}
+	renderBills = (data) => {
+		const bills = data.map((bill) => {
+			return (
+				<li className='c-bills__container__list__item' key={bill.id}>
+					<div className='c-bills__container__list__item__logo'>
+						<img src={bill.logo} alt='Company logo' />
+						<p>{bill.company}</p>
+					</div>
+					<div className='c-bills__container__list__item__price'>- ${bill.cost}</div>
+				</li>
+			)
+		});
+		return bills;
 	}
 
 	render() {
@@ -17,34 +26,7 @@ class Bills extends React.Component {
 					</div>
 
 					<ul className='c-bills__container__list'>
-						<li className='c-bills__container__list__item'>
-							<div className='c-bills__container__list__item__logo'>
-								<img src={logo} alt='Company logo' />
-								<p>Netflix</p>
-							</div>
-							<div className='c-bills__container__list__item__price'>- $18.99</div>
-						</li>
-						<li className='c-bills__container__list__item'>
-							<div className='c-bills__container__list__item__logo'>
-								<img src={logo} alt='Company logo' />
-								<p>Netflix</p>
-							</div>
-							<div className='c-bills__container__list__item__price'>- $18.99</div>
-						</li>
-						<li className='c-bills__container__list__item'>
-							<div className='c-bills__container__list__item__logo'>
-								<img src={logo} alt='Company logo' />
-								<p>Netflix</p>
-							</div>
-							<div className='c-bills__container__list__item__price'>- $18.99</div>
-						</li>
-						<li className='c-bills__container__list__item'>
-							<div className='c-bills__container__list__item__logo'>
-								<img src={logo} alt='Company logo' />
-								<p>Netflix</p>
-							</div>
-							<div className='c-bills__container__list__item__price'>- $18.99</div>
-						</li>
+						{this.renderBills(this.props.bills)}
 					</ul>
 				</div>
 			</section>

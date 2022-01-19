@@ -69,6 +69,16 @@ table {
   background: linear-gradient(138deg, #020024 0%, rgba(106, 9, 121, 0.836555) 40%, #00d4ff 100%);
 }
 
+.c-container__background {
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 77vh;
+  background-color: #f2f2f2;
+}
+
 .c-header {
   width: 100%;
   display: -webkit-box;
@@ -95,7 +105,11 @@ table {
 }
 
 .c-bills {
+  position: relative;
+  z-index: 10;
+  height: calc(100vh - 120px - 97px);
   padding: 0 20px;
+  overflow-y: scroll;
 }
 
 .c-bills__container__total {
@@ -125,6 +139,9 @@ table {
   padding: 20px 20px;
   background-color: #fff;
   border-radius: 10px;
+  box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
+  -webkit-box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
 }
 
 .c-bills__container__list__item {
@@ -138,7 +155,7 @@ table {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .c-bills__container__list__item:last-child {
@@ -152,7 +169,7 @@ table {
 .c-bills__container__list__item::after {
   position: absolute;
   content: '';
-  bottom: -10px;
+  bottom: -15px;
   left: -20px;
   right: -20px;
   border-bottom: 1px solid #a8a8a8;
@@ -187,6 +204,7 @@ table {
   position: absolute;
   bottom: 0;
   width: 100%;
+  z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -198,6 +216,9 @@ table {
       -ms-flex-align: center;
           align-items: center;
   background-color: #fff;
+  box-shadow: 0px -8px 15px -4px rgba(0, 0, 0, 0.34);
+  -webkit-box-shadow: 0px -8px 15px -4px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px -8px 15px -4px rgba(0, 0, 0, 0.34);
 }
 
 .c-nav__link {
@@ -225,6 +246,12 @@ table {
   height: 50px;
   background-color: #00d4ff;
   border-radius: 50%;
+  -webkit-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
+}
+
+.c-nav__link--add:hover {
+  background-color: #6a0979;
 }
 
 .c-nav__link--add .c-nav__link__icon {
@@ -238,5 +265,105 @@ table {
 .c-nav__link--add svg {
   margin-bottom: 0;
   color: #fff;
+}
+
+.c-addBill {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(138deg, #020024 0%, rgba(106, 9, 121, 0.836555) 40%, #00d4ff 100%);
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.17, 0.84, 0.44, 1);
+  transition: -webkit-transform 0.7s cubic-bezier(0.17, 0.84, 0.44, 1);
+  transition: transform 0.7s cubic-bezier(0.17, 0.84, 0.44, 1);
+  transition: transform 0.7s cubic-bezier(0.17, 0.84, 0.44, 1), -webkit-transform 0.7s cubic-bezier(0.17, 0.84, 0.44, 1);
+  -webkit-transform: translate3d(0, 100vh, 0);
+          transform: translate3d(0, 100vh, 0);
+}
+
+.c-addBill.active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.c-addBill__container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: calc(100% - 40px);
+  padding: 20px 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
+  -webkit-box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
+}
+
+.c-addBill__container h2 {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}
+
+.c-addBill__container button {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #a8a8a8;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #00d4ff;
+  -webkit-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
+}
+
+.c-addBill__container button:hover {
+  cursor: pointer;
+  background-color: #6a0979;
+}
+
+.c-addBill__container__group {
+  margin-bottom: 30px;
+}
+
+.c-addBill__container__group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.c-addBill__container__group input {
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 20px;
+  border: 1px solid #a8a8a8;
+  border-radius: 3px;
+}
+
+@media only screen and (min-width: 600px) {
+  .c-addBill__container {
+    width: 100%;
+  }
+  .c-nav {
+    width: 600px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    border-radius: 10px;
+  }
 }
 /*# sourceMappingURL=index.css.map */
