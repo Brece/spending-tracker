@@ -21,22 +21,27 @@ class AddBill extends React.Component {
 
 	handleChange = (e) => {
 	// TODO: change state object for company, cost, logo, id
-		this.setState({ value: e.target.value });
+	const name = e.target.name;
+	const value = e.target.type === 'ckeckbox'
+		? e.target.ckecked
+		: e.target.value;
+
+		this.setState({ [name]: value });
 	}
 
 	render() {
 		return (
-			<section className='c-addBill'>
+			<section className={`c-addBill${this.props.active ? ' active' : ''}`}>
 				<div className='o-wrap c-addBill__container'>
 					<h2>Add Spending</h2>
 					<form onSubmit={this.handleSubmit}>
 						<div className='c-addBill__container__group'>
 							<label htmlFor='company_name'>Company Name</label>
-							<input type='text' id='company_name' name='company_name' onChange={this.handleChange} value={this.state.bill.company} />
+							<input type='text' id='company_name' name='company_name' onChange={this.handleChange} />
 						</div>
 						<div className='c-addBill__container__group'>
 							<label htmlFor='cost'>Cost</label>
-							<input type='text' id='cost' name='cost' onChange={this.handleChange} value={this.state.bill.cost} />
+							<input type='text' id='cost' name='cost' onChange={this.handleChange} />
 						</div>
 						<button type='submit'>Save</button>
 					</form>

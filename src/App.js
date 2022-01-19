@@ -10,6 +10,7 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
+			addBillActive: false,
 			bills: [
 				{
 					company: 'Netflix',
@@ -45,14 +46,18 @@ class App extends React.Component {
 		}
 	}
 
+	handleFormActive = () => {
+		this.setState({ addBillActive: !this.state.addBillActive })
+	}
+
 	render() {
 		return (
 			<div className='c-container'>
 				<Header />
 				<Bills bills={this.state.bills}/>
-				<AddBill />
+				<AddBill active={this.state.addBillActive}/>
 				<div className='c-container__background' />
-				<FloatingMenu />
+				<FloatingMenu handleFormActive={this.handleFormActive} />
 			</div>
 		)
 	}

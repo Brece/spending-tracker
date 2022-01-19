@@ -35,7 +35,7 @@ class FloatingMenu extends React.Component {
                     </div>
                     <div className='c-nav__link__text'>settings</div>
                 </div>
-                <div className='c-nav__link c-nav__link--add'>
+                <div className='c-nav__link c-nav__link--add' onClick={() => this.props.handleFormActive()}>
                     <div className='c-nav__link__icon'>
                         <FontAwesomeIcon icon={faPlus} />
                     </div>
