@@ -111,6 +111,7 @@ table {
   height: calc(100vh - 120px - 97px);
   padding: 0 20px;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .c-bills__container__total {
@@ -176,7 +177,7 @@ table {
   border-bottom: 1px solid #a8a8a8;
 }
 
-.c-bills__container__list__item__logo {
+.c-bills__container__list__item__text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -185,16 +186,28 @@ table {
           align-items: center;
 }
 
-.c-bills__container__list__item__logo img {
-  width: 24px;
-  height: 24px;
-  margin-right: 20px;
-}
-
-.c-bills__container__list__item__logo p {
+.c-bills__container__list__item__text p {
   font-weight: bold;
   color: #454545;
   text-transform: capitalize;
+}
+
+.c-bills__container__list__item__text__logo {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  background-color: #00d4ff;
+  border-radius: 50%;
+}
+
+.c-bills__container__list__item__text__logo svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #fff;
 }
 
 .c-bills__container__list__item__price {

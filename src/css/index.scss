@@ -29,7 +29,7 @@ $linear-gradient: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(106,9,121,0.83
 .c-header { width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: $vspace*2; padding: $vspace 0; }
 .c-header h1 { font-size: $font-size-xxlarge; font-weight: bold; color: #fff; }
 
-.c-bills { position: relative; z-index: 10; height: calc(100vh - 120px - 97px); padding: 0 $hspace; overflow-y: scroll; }
+.c-bills { position: relative; z-index: 10; height: calc(100vh - 120px - 97px); padding: 0 $hspace; overflow-y: scroll; scrollbar-width: none; }
 .c-bills__container__total { display: flex; justify-content: space-between; align-items: center; margin-bottom: $vspace*2; color: #fff; }
 .c-bills__container__total__text { font-size: $font-size-large; }
 .c-bills__container__total__number { font-size: $font-size-medium; }
@@ -41,9 +41,11 @@ $linear-gradient: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(106,9,121,0.83
   }
 }
 .c-bills__container__list__item::after { position: absolute; content: ''; bottom: -$vspace*0.75; left: -$hspace; right: -$hspace; border-bottom: 1px solid $color-border; }
-.c-bills__container__list__item__logo { display: flex; align-items: center; 
-  img { width: 24px; height: 24px; margin-right: $hspace; }
+.c-bills__container__list__item__text { display: flex; align-items: center; 
   p { font-weight: bold; color: $font-color-dark; text-transform: capitalize; }
+}
+.c-bills__container__list__item__text__logo { position: relative; width: 30px; height: 30px; margin-right: $hspace; background-color: $color-bg-add; border-radius: 50%;
+  svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; }
 }
 .c-bills__container__list__item__price { color: $font-color-light; }
 
