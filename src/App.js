@@ -56,9 +56,7 @@ class App extends React.Component {
 	handleFormSubmit = (newBill) => {
 		this.setState(
 			{ bills: [...this.state.bills, newBill] },
-			() => {
-				localStorage.setItem('bills', JSON.stringify(this.state.bills));
-			}
+			() => this.updateLocalStorage()
 		);
 	}
 
@@ -68,12 +66,43 @@ class App extends React.Component {
 		return total;
 	}
 
+	handleBillActive = (e) => {
+		const id = e.target.dataset.id;
+		const newBillsArray = this.state.bills.map((bill) => {
+			if (bill.id === id) {
+				bill = Object.assign({}, bill, {notActive: !bill.notActive});
+				// bill = {...bill, notActive: !bill.notActive}
+			}
+			return bill;
+		});
+		this.setState(
+			{ bills: newBillsArray },
+			() => this.updateLocalStorage()
+		);
+	}
+
+	handleBillDelete = (e) => {
+		const cost = e.target.dataset.cost;
+		const newBillsArray = this.state.bills.filter((bill) => {
+			return bill.cost !== cost;
+		});
+		
+		this.setState(
+			{ bills: newBillsArray },
+			() => this.updateLocalStorage()
+		);
+	}
+
+	updateLocalStorage = () => {
+		localStorage.setItem('bills', JSON.stringify(this.state.bills));
+	}
+
 	render() {
 		return (
 			<div className='c-container'>
 				<Header />
-				<Bills total={this.calculateTotal()} bills={this.state.bills}/>
-				<AddBill active={this.state.addBillActive} handleFormSubmit={this.handleFormSubmit} handleFormActive={this.handleFormActive}/>
+				<Bills total={this.calculateTotal()} bills={this.state.bills} handleBillActive={this.handleBillActive} handleBillDelete={this.handleBillDelete}/>
+				<AddBill active={this.state.addBillActive} handleFormSubmit={this.handleFormSubmit} handleFormActive={this.handleFormActive} />
 				<div className='c-container__background' />
 				<FloatingMenu handleFormActive={this.handleFormActive} />
 			</div>

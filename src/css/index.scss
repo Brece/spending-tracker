@@ -23,6 +23,17 @@ $linear-gradient: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(106,9,121,0.83
 // ------------- Billing App ---------------
 .o-wrap { max-width: 600px; margin: 0 auto; }
 
+.c-btn { margin-bottom: $vspace/4; padding: $vspace/8 $hspace/2; border: 1px solid $color-border; border-radius: 3px; transition: background-color .3s ease-in-out; color: $font-color-dark;
+  &:hover { cursor: pointer; }
+}
+.c-btn--paid { background-color: #a5f477; 
+  &:hover { background-color: #8bf44e; }
+  &.notActive { background-color: #fff; }
+}
+.c-btn--delete { background-color: #f97c8f; 
+  &:hover { background-color: #f9435e; }
+}
+
 .c-container { position: relative; width: 100%; height: 100vh; background: $linear-gradient; overflow: hidden; }
 .c-container__background { position: absolute; z-index: 5; bottom: 0; left: 0; right: 0; height: 77vh; background-color: $color-bg; }
 
@@ -34,31 +45,28 @@ $linear-gradient: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(106,9,121,0.83
 .c-bills__container__total__text { font-size: $font-size-large; }
 .c-bills__container__total__number { font-size: $font-size-medium; }
 
-.c-bills__container__list { margin-bottom: $vspace/2; padding: $vspace $hspace; background-color: #fff; border-radius: 10px; box-shadow: 0px 8px 15px -4px rgba(0,0,0,0.34); -webkit-box-shadow: 0px 8px 15px -4px rgba(0,0,0,0.34); -moz-box-shadow: 0px 8px 15px -4px rgba(0,0,0,0.34); }
-.c-bills__container__list__item { position: relative; display: flex; justify-content: space-between; align-items: center; margin-bottom: $vspace*1.5; 
+.c-bills__container__list { margin-bottom: $vspace/2; background-color: #fff; border-radius: 10px; box-shadow: 0px 8px 15px -4px rgba(0,0,0,0.34); -webkit-box-shadow: 0px 8px 15px -4px rgba(0,0,0,0.34); -moz-box-shadow: 0px 8px 15px -4px rgba(0,0,0,0.34); overflow: hidden; }
+.c-bills__container__list__item { position: relative; display: flex; justify-content: space-between; align-items: center; padding: $vspace $hspace; background-color: #fceaed;
   &:last-child { margin-bottom: 0; 
     &::after{ border-bottom: none; }
   }
 }
-.c-bills__container__list__item::after { position: absolute; content: ''; bottom: -$vspace*0.75; left: -$hspace; right: -$hspace; border-bottom: 1px solid $color-border; }
+.c-bills__container__list__item.notActive { background-color: #e6f7dc; }
+.c-bills__container__list__item::after { position: absolute; content: ''; bottom: 0; left: 0; right: 0; border-bottom: 1px solid $color-border; }
 .c-bills__container__list__item__text { display: flex; align-items: center; 
   p { font-weight: bold; color: $font-color-dark; text-transform: capitalize; }
 }
-.c-bills__container__list__item__text__logo { position: relative; width: 30px; height: 30px; margin-right: $hspace; background-color: $color-bg-add; border-radius: 50%;
-  svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; }
+.c-bills__container__list__item__text__logo { position: relative; width: 40px; height: 40px; margin-right: $hspace; background-color: $color-bg-add; border-radius: 50%;
+  svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: $font-size-medium; color: #fff; }
 }
 .c-bills__container__list__item__price { color: $font-color-light; }
+.c-bills__container__list__item__buttons { display: flex; flex-direction: column; }
 
 .c-nav { position: absolute; bottom: 0; width: 100%; z-index: 100; display: flex; padding: 0 $hspace; justify-content: space-between; align-items: center; background-color: #fff; box-shadow: 0px -8px 15px -4px rgba(0,0,0,0.34); -webkit-box-shadow: 0px -8px 15px -4px rgba(0,0,0,0.34); -moz-box-shadow: 0px -8px 15px -4px rgba(0,0,0,0.34); }
 .c-nav__link { padding: $vspace $hspace/2; text-align: center; color: $font-color-light; text-transform: capitalize; transition: all .3s ease-in-out; 
   &:hover { cursor: pointer; color: $color-icon; }
 }
 .c-nav__link__icon svg { margin-bottom: $vspace/2; font-size: 30px; }
-// TODO: add separate bg color
-// .c-nav__link--spend {}
-// .c-nav__link--save {}
-// .c-nav__link--history {}
-// .c-nav__link--settings {}
 .c-nav__link--add { position: relative; width: 50px; height: 50px; background-color: $color-bg-add; border-radius: 50%; transition: background-color .3s ease-in-out;
   &:hover { background-color: $color-icon; }
   .c-nav__link__icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }

@@ -3,11 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTheaterMasks, faWallet, faHome, faUserGraduate, faBus, faDumbbell, faUtensils, faShoppingBag } from '@fortawesome/free-solid-svg-icons'; 
 
 class Bills extends React.Component {
+	toggleBillActive = (e) => {
+		this.props.handleBillActive(e);
+	}
+
+	handleDelete = (e) => {
+		this.props.handleBillDelete(e);
+	}
+
 	renderBills = (data) => {
 		if (data.length > 0) {
 			const bills = data.map((bill) => {
 				return (
-					<li className='c-bills__container__list__item' key={bill.id}>
+					<li className={`c-bills__container__list__item${ bill.notActive ? ' notActive' : '' }` } key={bill.id}>
 						<div className='c-bills__container__list__item__text'>
 							<div className='c-bills__container__list__item__text__logo'>
 								<FontAwesomeIcon icon={this.findCategory(bill)} />
@@ -15,6 +23,10 @@ class Bills extends React.Component {
 							<p>{bill.company}</p>
 						</div>
 						<div className='c-bills__container__list__item__price'>${bill.cost}</div>
+						<div className='c-bills__container__list__item__buttons'>
+							<button type='button' className={`c-btn c-btn--paid${ bill.notActive ? ' notActive' : '' }` } data-id={bill.id} onClick={this.toggleBillActive}>Paid</button>
+							<button type='button' className='c-btn c-btn--delete' data-cost={bill.cost} onClick={this.handleDelete}>Delete</button>
+						</div>
 					</li>
 				);
 		});

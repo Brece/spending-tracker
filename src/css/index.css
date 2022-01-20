@@ -62,6 +62,40 @@ table {
   margin: 0 auto;
 }
 
+.c-btn {
+  margin-bottom: 5px;
+  padding: 2.5px 10px;
+  border: 1px solid #a8a8a8;
+  border-radius: 3px;
+  -webkit-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
+  color: #454545;
+}
+
+.c-btn:hover {
+  cursor: pointer;
+}
+
+.c-btn--paid {
+  background-color: #a5f477;
+}
+
+.c-btn--paid:hover {
+  background-color: #8bf44e;
+}
+
+.c-btn--paid.notActive {
+  background-color: #fff;
+}
+
+.c-btn--delete {
+  background-color: #f97c8f;
+}
+
+.c-btn--delete:hover {
+  background-color: #f9435e;
+}
+
 .c-container {
   position: relative;
   width: 100%;
@@ -138,12 +172,12 @@ table {
 
 .c-bills__container__list {
   margin-bottom: 10px;
-  padding: 20px 20px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
   -webkit-box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
   -moz-box-shadow: 0px 8px 15px -4px rgba(0, 0, 0, 0.34);
+  overflow: hidden;
 }
 
 .c-bills__container__list__item {
@@ -157,7 +191,8 @@ table {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 30px;
+  padding: 20px 20px;
+  background-color: #fceaed;
 }
 
 .c-bills__container__list__item:last-child {
@@ -168,12 +203,16 @@ table {
   border-bottom: none;
 }
 
+.c-bills__container__list__item.notActive {
+  background-color: #e6f7dc;
+}
+
 .c-bills__container__list__item::after {
   position: absolute;
   content: '';
-  bottom: -15px;
-  left: -20px;
-  right: -20px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   border-bottom: 1px solid #a8a8a8;
 }
 
@@ -194,8 +233,8 @@ table {
 
 .c-bills__container__list__item__text__logo {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   margin-right: 20px;
   background-color: #00d4ff;
   border-radius: 50%;
@@ -207,11 +246,22 @@ table {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  font-size: 20px;
   color: #fff;
 }
 
 .c-bills__container__list__item__price {
   color: #727272;
+}
+
+.c-bills__container__list__item__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .c-nav {

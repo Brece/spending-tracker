@@ -7,7 +7,8 @@ class AddBill extends React.Component {
 		this.state = {
 			company: '',
 			cost: '',
-			category: ''
+			category: '',
+			notActive: false
 		}
 	}
 
