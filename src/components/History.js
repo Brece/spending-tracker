@@ -1,17 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTheaterMasks, faWallet, faHome, faUserGraduate, faBus, faDumbbell, faUtensils, faShoppingBag } from '@fortawesome/free-solid-svg-icons'; 
+import { faTheaterMasks, faWallet, faHome, faUserGraduate, faBus, faDumbbell, faUtensils, faShoppingBag, faTimes } from '@fortawesome/free-solid-svg-icons'; 
 
-class Bills extends React.Component {
-	toggleBillActive = (e) => {
-		this.props.handleBillActive(e);
-	}
-
-	handleDelete = (e) => {
-		this.props.handleBillDelete(e);
-	}
-
-	renderBills = (data) => {
+class History extends React.Component {
+    renderHistory = (data) => {
 		if (data.length > 0) {
 			const bills = data.map((bill) => {
 				return (
@@ -24,10 +16,6 @@ class Bills extends React.Component {
 						</div>
 						<div className='c-bills__container__list__item__action'>
 							<div className='c-bills__container__list__item__action__price'>${bill.cost}</div>
-							<div className='c-bills__container__list__item__action__buttons'>
-								<button type='button' className={`c-btn c-btn--paid${ bill.notActive ? ' notActive' : '' }` } data-id={bill.id} onClick={this.toggleBillActive}>Paid</button>
-								<button type='button' className='c-btn c-btn--delete' data-cost={bill.cost} onClick={this.handleDelete}>Delete</button>
-							</div>
 						</div>
 					</li>
 				);
@@ -36,13 +24,13 @@ class Bills extends React.Component {
 		} else {
 			return (
 				<li className='c-bills__container__list__item'>
-					<p>No spendings. Please add one below.</p>
+					<p>No spending history.</p>
 				</li>
 			);
 		}
 	}
 
-	findCategory = (bill) => {
+    findCategory = (bill) => {
 		let icon;
 
 		switch (bill.category) {
@@ -73,22 +61,25 @@ class Bills extends React.Component {
 		return icon;
 	}
 
-	render() {
-		return (
-			<section className='o-wrap c-bills'>
-				<div className='c-bills__container'>
-					<div className='c-bills__container__total'>
-						<div className='c-bills__container__total__text'>Total Amount:</div>
-						<div className='c-bills__container__total__number'>${this.props.total}</div>
-					</div>
+    toggleActive = (e) => {
+        this.props.handlePopupActive(e);
+    }
 
-					<ul className='c-bills__container__list'>
-						{this.renderBills(this.props.bills)}
-					</ul>
-				</div>
-			</section>
-		);
-	}
+    render() {
+        return (
+            <section className={`c-history${this.props.active ? ' active' : ''}`}>
+                <div className='o-wrap c-history__container'>
+                    <h2>History</h2>
+                    <ul className='c-bills__container__list'>
+                        {this.renderHistory(this.props.history)}
+                    </ul>
+                    <div className='c-addBill__container__closeBtn' data-section='historyActive' onClick={this.toggleActive}>
+						<FontAwesomeIcon icon={faTimes} />
+					</div>
+                </div>
+            </section>
+        );
+    }
 }
 
-export default Bills;
+export default History;

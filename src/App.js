@@ -3,54 +3,46 @@ import Bills from './components/Bills';
 import AddBill from './components/AddBill';
 import Header from './components/Header';
 import FloatingMenu from './components/FloatingMenu';
-// import logo from './img/logo.png'
-
-/*
- let bills = [
-	{
-		company: 'Netflix',
-		cost: 13.99,
-		logo: logo,
-		id: uniqid()
-	},
-	{
-		company: 'Shopify',
-		cost: 36.90,
-		logo: logo,
-		id: uniqid()
-	},
-	{
-		company: 'Amazon',
-		cost: 64.99,
-		logo: logo,
-		id: uniqid()
-	},
-	{
-		company: 'Spotify',
-		cost: 9.99,
-		logo: logo,
-		id: uniqid()
-	},
-	{
-		company: 'YouTube',
-		cost: 12.00,
-		logo: logo,
-		id: uniqid()
-	}
-]
-*/
+import History from './components/History';
+import Settings from './components/Settings';
 
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			addBillActive: false,
-			bills: localStorage.length !== 0 ? JSON.parse(localStorage.getItem('bills')) : []
+			historyActive: false,
+			settingsActive: false,
+			bills: localStorage.length !== 0 ? JSON.parse(localStorage.getItem('bills')) : [],
+			history: localStorage.length !== 0 ? JSON.parse(localStorage.getItem('history')) : []
 		}
 	}
 
-	handleFormActive = () => {
-		this.setState({ addBillActive: !this.state.addBillActive })
+	handlePopupActive = (e) => {
+		const activeState = e.currentTarget.dataset.section;
+
+		switch (activeState) {
+			case 'addBillActive':
+				this.setState({
+					addBillActive: !this.state.addBillActive,
+					historyActive: false,
+					settingsActive: false
+				});
+				break;
+			case 'historyActive':
+				this.setState({
+					addBillActive: false,
+					historyActive: !this.state.historyActive,
+					settingsActive: false
+				});
+				break;
+			default:
+				this.setState({
+					addBillActive: false,
+					historyActive: false,
+					settingsActive: !this.state.settingsActive
+				});
+		}
 	}
 
 	handleFormSubmit = (newBill) => {
@@ -83,18 +75,33 @@ class App extends React.Component {
 
 	handleBillDelete = (e) => {
 		const cost = e.target.dataset.cost;
+		let deletedBill;
 		const newBillsArray = this.state.bills.filter((bill) => {
+			if (bill.cost === cost) {
+				deletedBill = bill;
+			}
 			return bill.cost !== cost;
 		});
-		
-		this.setState(
-			{ bills: newBillsArray },
+
+		this.setState({
+			bills: newBillsArray,
+			history: [...this.state.history, deletedBill]
+		},
 			() => this.updateLocalStorage()
 		);
 	}
 
 	updateLocalStorage = () => {
 		localStorage.setItem('bills', JSON.stringify(this.state.bills));
+		localStorage.setItem('history', JSON.stringify(this.state.history));
+	}
+
+	clearLocalStorage = (key) => {
+		this.setState({
+			[key]: []
+		},
+			() => this.updateLocalStorage()
+		);
 	}
 
 	render() {
@@ -102,9 +109,11 @@ class App extends React.Component {
 			<div className='c-container'>
 				<Header />
 				<Bills total={this.calculateTotal()} bills={this.state.bills} handleBillActive={this.handleBillActive} handleBillDelete={this.handleBillDelete}/>
-				<AddBill active={this.state.addBillActive} handleFormSubmit={this.handleFormSubmit} handleFormActive={this.handleFormActive} />
+				<AddBill active={this.state.addBillActive} handleFormSubmit={this.handleFormSubmit} handlePopupActive={this.handlePopupActive} />
+				<History active={this.state.historyActive} history={this.state.history} handleBillDelete={this.handleBillDelete} handlePopupActive={this.handlePopupActive}/>
+				<Settings active={this.state.settingsActive} clearLocalStorage={this.clearLocalStorage} handlePopupActive={this.handlePopupActive} />
 				<div className='c-container__background' />
-				<FloatingMenu handleFormActive={this.handleFormActive} />
+				<FloatingMenu handlePopupActive={this.handlePopupActive} />
 			</div>
 		)
 	}
